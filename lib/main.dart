@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'Montserrat',
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: LoginScreen(),
     );

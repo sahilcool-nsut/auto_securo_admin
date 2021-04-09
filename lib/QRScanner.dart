@@ -71,14 +71,15 @@ class _QRScannerState extends State<QRScanner> {
                     children: [
                       Text(result.code),
                       SizedBox(height:20),
+                      result.code.contains("Scanned by AutoSecure")?
                       InkWell(
                         onTap: _sendNotification,
                         child: Container(
                           padding:EdgeInsets.all(12.0),
                           color: Colors.red,
-                          child: Text("Send Notification"),
+                          child: Text("Send Notification",style: TextStyle(color: Colors.white),),
                         ),
-                      )
+                      ):Container()
                     ],
                   ):Text("Scan the QR"),
 

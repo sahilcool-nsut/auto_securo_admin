@@ -1,3 +1,4 @@
+import 'package:auto_securo_admin/QRScanner.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -39,6 +40,19 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height:30),
+              Align(
+                alignment: Alignment.topRight,
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context,PageTransition(child: QRScanner(), type: PageTransitionType.fade));
+                  },
+                  child: Container(
+                    padding:EdgeInsets.all(12.0),
+                    color: Colors.red,
+                    child: Text("Scanner",style: TextStyle(color: Colors.white),),
+                  ),
+                ),
+              ),
               Container(
                 child: Text(
                   'Hello,',
