@@ -8,9 +8,9 @@ import 'screens/navbar_screens/QRScanner.dart';
 import 'screens/home_page.dart';
 
 class NavBar extends StatefulWidget {
-  // final int currentPage;
+   final int currentPage;
 
-  // NavBar({this.currentPage});
+   NavBar({this.currentPage});
 
   @override
   _NavBarState createState() => _NavBarState();
@@ -25,9 +25,15 @@ class _NavBarState extends State<NavBar> {
   //     return widget.currentPage;
   //   }
   // }
-  int currentPageLocal = 1;
+  int currentPageLocal;
+
 
   GlobalKey bottomNavigationKey = GlobalKey();
+  @override
+  void initState() {
+    currentPageLocal = widget.currentPage;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +68,7 @@ class _NavBarState extends State<NavBar> {
           ),
           TabData(iconData: Icons.car_rental, title: "Link Vehicle")
         ],
-        initialSelection: 1,
+        initialSelection: currentPageLocal,
         key: bottomNavigationKey,
         onTabChangedListener: (position) {
           setState(() {

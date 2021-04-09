@@ -22,8 +22,8 @@ class _QRScannerState extends State<QRScanner> {
   void reassemble() {
     super.reassemble();
     if (Platform.isAndroid) {
-      controller.pauseCamera();
-      controllerPaused = true;
+     // controller.pauseCamera();
+     // controllerPaused = true;
     } else if (Platform.isIOS) {
       controller.resumeCamera();
       controllerPaused = false;

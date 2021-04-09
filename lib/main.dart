@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Montserrat',
         primarySwatch: Colors.red,
       ),
-      home: NavBar(),
+      home: NavBar(currentPage: 0),
     );
   }
 }
