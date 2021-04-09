@@ -1,17 +1,31 @@
-import 'package:auto_securo_admin/link_vehicle.dart';
+import 'package:auto_securo_admin/screens/login_screens/login_button_screen.dart';
+import 'package:auto_securo_admin/screens/login_screens/login_screen.dart';
+import 'package:auto_securo_admin/screens/navbar_screens/link_vehicle.dart';
 import 'package:flutter/material.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 
-import 'QRScanner.dart';
-import 'home_page.dart';
+import 'screens/navbar_screens/QRScanner.dart';
+import 'screens/home_page.dart';
 
 class NavBar extends StatefulWidget {
+  // final int currentPage;
+
+  // NavBar({this.currentPage});
+
   @override
   _NavBarState createState() => _NavBarState();
 }
 
 class _NavBarState extends State<NavBar> {
-  int currentPage = 0;
+  // int getCurrentPage(){
+  //   if(widget.currentPage == null){
+  //     return 1;
+  //   }
+  //   else{
+  //     return widget.currentPage;
+  //   }
+  // }
+  int currentPageLocal = 1;
 
   GlobalKey bottomNavigationKey = GlobalKey();
 
@@ -21,13 +35,22 @@ class _NavBarState extends State<NavBar> {
       body: Container(
         decoration: BoxDecoration(color: Colors.white),
         child: Center(
-          child: _getPage(currentPage),
+          child: _getPage(currentPageLocal),
         ),
       ),
       bottomNavigationBar: FancyBottomNavigation(
         circleColor: Colors.red,
         inactiveIconColor: Colors.red,
         tabs: [
+          TabData(
+            iconData: Icons.qr_code_scanner,
+            title: "QR Scanner",
+            // onclick: () => Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => ScannerScreen(),
+            //   ),
+            // ),
+          ),
           TabData(
             iconData: Icons.home,
             title: "Home",
@@ -37,22 +60,13 @@ class _NavBarState extends State<NavBar> {
             //   fState.setPage(2);
             // },
           ),
-          TabData(
-            iconData: Icons.qr_code,
-            title: "QR Scanner",
-            // onclick: () => Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => ScannerScreen(),
-            //   ),
-            // ),
-          ),
           TabData(iconData: Icons.car_rental, title: "Link Vehicle")
         ],
-        initialSelection: 0,
+        initialSelection: 1,
         key: bottomNavigationKey,
         onTabChangedListener: (position) {
           setState(() {
-            currentPage = position;
+            currentPageLocal = position;
           });
         },
       ),
@@ -62,11 +76,11 @@ class _NavBarState extends State<NavBar> {
   _getPage(int page) {
     switch (page) {
       case 0:
-        return HomePage();
-      case 1:
         return QRScanner();
+      case 1:
+        return HomePage();
       default:
-        return LinkVehicle();
+        return LoginButton();
     }
   }
 }

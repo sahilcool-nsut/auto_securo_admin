@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import 'globals.dart';
+import '../../globals.dart';
 
 class QRScanner extends StatefulWidget {
   @override
@@ -11,7 +11,6 @@ class QRScanner extends StatefulWidget {
 }
 
 class _QRScannerState extends State<QRScanner> {
-
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode result;
   QRViewController controller;
@@ -36,56 +35,65 @@ class _QRScannerState extends State<QRScanner> {
     controller?.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: myAppBar,
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal:24.0,vertical:36.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 36.0),
           child: ListView(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                    Container(
+                  Container(
                       height: MediaQuery.of(context).size.height * 0.5,
-                      child: _buildQrView(context)
-                    ),
-                  SizedBox(height:10),
+                      child: _buildQrView(context)),
+                  SizedBox(height: 10),
                   Align(
                     alignment: Alignment.topLeft,
                     child: Visibility(
                       visible: controllerPaused,
                       child: InkWell(
-                          child: Container(padding:EdgeInsets.all(12.0),color:Colors.red,child: Text("Scan Again",style: TextStyle(color: Colors.white),)),
-                          onTap: (){
+                          child: Container(
+                              padding: EdgeInsets.all(12.0),
+                              color: Colors.red,
+                              child: Text(
+                                "Scan Again",
+                                style: TextStyle(color: Colors.white),
+                              )),
+                          onTap: () {
                             controller.resumeCamera();
                             setState(() {
                               controllerPaused = false;
                             });
-
-                          }
-                      ),
+                          }),
                     ),
                   ),
-                  SizedBox(height:70),
-                  result!=null?Column(
-                    children: [
-                      Text(result.code),
-                      SizedBox(height:20),
-                      result.code.contains("Scanned by AutoSecure")?
-                      InkWell(
-                        onTap: _sendNotification,
-                        child: Container(
-                          padding:EdgeInsets.all(12.0),
-                          color: Colors.red,
-                          child: Text("Send Notification",style: TextStyle(color: Colors.white),),
-                        ),
-                      ):Container()
-                    ],
-                  ):Text("Scan the QR"),
-
+                  SizedBox(height: 70),
+                  result != null
+                      ? Column(
+                          children: [
+                            Text(result.code),
+                            SizedBox(height: 20),
+                            result.code.contains("Scanned by AutoSecure")
+                                ? InkWell(
+                                    onTap: _sendNotification,
+                                    child: Container(
+                                      padding: EdgeInsets.all(12.0),
+                                      color: Colors.red,
+                                      child: Text(
+                                        "Send Notification",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  )
+                                : Container()
+                          ],
+                        )
+                      : Text("Scan the QR"),
                 ],
               )
             ],
@@ -94,10 +102,11 @@ class _QRScannerState extends State<QRScanner> {
       ),
     );
   }
+
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
-        MediaQuery.of(context).size.height < 400)
+            MediaQuery.of(context).size.height < 400)
         ? 150.0
         : 300.0;
     // To ensure the Scanner view is properly sizes after rotation
@@ -113,25 +122,24 @@ class _QRScannerState extends State<QRScanner> {
           cutOutSize: scanArea),
     );
   }
+
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
       });
-      if(result.code.contains("Scanned by AutoSecure"))
-        {
-          controller.pauseCamera();
-          setState(() {
-            controllerPaused = true;
-          });
-
-        }
+      if (result.code.contains("Scanned by AutoSecure")) {
+        controller.pauseCamera();
+        setState(() {
+          controllerPaused = true;
+        });
+      }
     });
   }
-  void _sendNotification(){
+
+  void _sendNotification() {
     String str = result.code;
     //use str here.
   }
-
 }

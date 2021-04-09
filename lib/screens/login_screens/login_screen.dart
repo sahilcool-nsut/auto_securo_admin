@@ -1,8 +1,8 @@
-import 'package:auto_securo_admin/QRScanner.dart';
+import 'package:auto_securo_admin/screens/navbar_screens/QRScanner.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-import 'NavBar.dart';
+import '../../NavBar.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,7 +10,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   bool passwordVisible = false;
   TextEditingController _userIdController;
   TextEditingController _passwordController;
@@ -25,9 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
   }
 
-  void _submitLoginDetails(String userId,String password)
-  {
-    Navigator.push(context,PageTransition(child: NavBar(), type: PageTransitionType.fade));
+  void _submitLoginDetails(String userId, String password) {
+    Navigator.push(context,
+        PageTransition(child: NavBar(), type: PageTransitionType.fade));
   }
 
   @override
@@ -35,24 +34,29 @@ class _LoginScreenState extends State<LoginScreen> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.all(24.0),
+          padding: EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height:30),
-              Align(
-                alignment: Alignment.topRight,
-                child: InkWell(
-                  onTap: (){
-                    Navigator.push(context,PageTransition(child: QRScanner(), type: PageTransitionType.fade));
-                  },
-                  child: Container(
-                    padding:EdgeInsets.all(12.0),
-                    color: Colors.red,
-                    child: Text("Scanner",style: TextStyle(color: Colors.white),),
-                  ),
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: InkWell(
+              //     onTap: () {
+              //       Navigator.push(
+              //           context,
+              //           PageTransition(
+              //               child: QRScanner(), type: PageTransitionType.fade));
+              //     },
+              //     child: Container(
+              //       padding: EdgeInsets.all(12.0),
+              //       color: Colors.red,
+              //       child: Text(
+              //         "Scanner",
+              //         style: TextStyle(color: Colors.white),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Container(
                 child: Text(
                   'Hello,',
@@ -67,9 +71,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   "Please enter your account details to access the Admin Portal",
                   style: TextStyle(fontSize: 16),
                 ),
-              ),
-              SizedBox(
-                height: 40,
               ),
               SizedBox(
                 height: 20,
@@ -99,20 +100,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: passwordVisible
                         ? Icon(
-                      Icons.remove_red_eye_outlined,
-                      color: Colors.white70,
-                    )
+                            Icons.remove_red_eye_outlined,
+                            color: Colors.white70,
+                          )
                         : Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.white70,
-                    ),
+                            Icons.remove_red_eye,
+                            color: Colors.white70,
+                          ),
                   ),
                 ),
                 controller: _passwordController,
               ),
-              SizedBox(height:10),
+              SizedBox(height: 10),
               Visibility(
-                visible:showError,
+                visible: showError,
                 child: Text(
                   error,
                   style: TextStyle(color: Colors.red),
@@ -129,10 +130,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height:50),
+              Spacer(),
               GestureDetector(
                 onTap: () {
-                  _submitLoginDetails(_userIdController.text,_passwordController.text);
+                  _submitLoginDetails(
+                      _userIdController.text, _passwordController.text);
                   setState(() {
                     loading = true;
                   });
@@ -141,29 +143,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.all(16),
                   child: loading
                       ? Center(
-                    child: Transform.scale(
-                      scale: 0.6,
-                      child: CircularProgressIndicator(
-                        valueColor:
-                        AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
-                    ),
-                  )
+                          child: Transform.scale(
+                            scale: 0.6,
+                            child: CircularProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                          ),
+                        )
                       : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 0,
-                      ),
-                      Text('Verify',
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 19)),
-                      Icon(
-                        Icons.arrow_right_alt,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 0,
+                            ),
+                            Text('Verify',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 19)),
+                            Icon(
+                              Icons.arrow_right_alt,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
                   decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(7)),
