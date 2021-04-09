@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import 'globals.dart';
+
 class QRScanner extends StatefulWidget {
   @override
   _QRScannerState createState() => _QRScannerState();
@@ -38,6 +40,7 @@ class _QRScannerState extends State<QRScanner> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: myAppBar,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal:24.0,vertical:36.0),
           child: ListView(
