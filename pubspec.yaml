@@ -16,6 +16,7 @@ dependencies:
   cached_network_image: ^3.0.0
   fancy_bottom_navigation: ^0.3.3
   qr_code_scanner: ^0.4.0
+  flutter_screenutil: ^5.0.0
 
   firebase_core: ^1.0.2
   firebase_auth: ^1.0.1

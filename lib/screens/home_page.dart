@@ -1,4 +1,5 @@
 import 'package:auto_securo_admin/VehicleInfo.dart';
+import 'package:auto_securo_admin/components/history_preview.dart';
 import 'package:auto_securo_admin/globals.dart';
 import 'package:auto_securo_admin/services/database_services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -135,6 +136,12 @@ class _HomePageState extends State<HomePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        // HistoryPreview(
+                                        //     startTime: '9:00',
+                                        //     username: 'Shubh',
+                                        //     vehicleNo: 'DL9CQS5290',
+                                        //     vehicleName: 'Maruti',
+                                        //     vehicleOwner: 'Gupta'),
                                         SizedBox(
                                             height: MediaQuery.of(context)
                                                     .size
