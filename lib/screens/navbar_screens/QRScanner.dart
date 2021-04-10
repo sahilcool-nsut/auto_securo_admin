@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:auto_securo_admin/services/database_services.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -15,6 +17,7 @@ class _QRScannerState extends State<QRScanner> {
   Barcode result;
   QRViewController controller;
   bool controllerPaused = false;
+  bool showConfirmation = false;
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -49,7 +52,7 @@ class _QRScannerState extends State<QRScanner> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                      height: MediaQuery.of(context).size.height * 0.5,
+                      height: MediaQuery.of(context).size.height * 0.4,
                       child: _buildQrView(context)),
                   SizedBox(height: 10),
                   Align(
@@ -72,13 +75,19 @@ class _QRScannerState extends State<QRScanner> {
                           }),
                     ),
                   ),
-                  SizedBox(height: 70),
+                  SizedBox(height: 20),
+
                   result != null
                       ? Column(
                           children: [
                             Text(result.code),
-                            SizedBox(height: 20),
-                            result.code.contains("Scanned by AutoSecure")
+                            SizedBox(height: 30),
+                            Visibility(
+                              visible: showConfirmation,
+                              child: Text("Notification Sent!!",style: TextStyle(color: Colors.green),),
+                            ),
+                            SizedBox(height:10),
+                            result.code.contains("Scanned by Auto Securo")
                                 ? InkWell(
                                     onTap: _sendNotification,
                                     child: Container(
@@ -94,6 +103,7 @@ class _QRScannerState extends State<QRScanner> {
                           ],
                         )
                       : Text("Scan the QR"),
+
                 ],
               )
             ],
@@ -129,7 +139,7 @@ class _QRScannerState extends State<QRScanner> {
       setState(() {
         result = scanData;
       });
-      if (result.code.contains("Scanned by AutoSecure")) {
+      if (result.code.contains("Scanned by Auto Securo")) {
         controller.pauseCamera();
         setState(() {
           controllerPaused = true;
@@ -138,8 +148,43 @@ class _QRScannerState extends State<QRScanner> {
     });
   }
 
-  void _sendNotification() {
+  void _sendNotification() async {
     String str = result.code;
-    //use str here.
+    print(str);
+    str = str.substring("Scanned by Auto Securo.".length);
+    String userName = str.substring(0,str.indexOf("contact"));
+    userName = userName.trim();
+
+    print(userName);
+
+    str = str.substring(str.indexOf("contact number:") + "contact number:".length);
+    String phoneNumber = str.substring(0,str.indexOf("took"));
+    phoneNumber = phoneNumber.trim();
+
+    print(phoneNumber);
+
+    str = str.substring(str.indexOf("took the vehicle:") + "took the vehicle:".length);
+    String vehicleName = str.substring(0,str.indexOf("numberplate"));
+    vehicleName = vehicleName.trim();
+
+    print(vehicleName);
+
+    str = str.substring(str.indexOf("numberplate:") + "numberplate:".length);
+    String numberPlate = str.substring(0,str.indexOf("on"));
+    numberPlate = numberPlate.trim();
+
+    print(numberPlate);
+
+    str = str.substring(str.indexOf("time:") + "time:".length);
+    String timeStamp = str.substring(0);
+    timeStamp = timeStamp.trim();
+
+    print(timeStamp);
+
+    await DatabaseService().sendNotification(userName,vehicleName,numberPlate,phoneNumber,timeStamp);
+    print("sent");
+    setState(() {
+      showConfirmation = true;
+    });
   }
 }

@@ -1,4 +1,6 @@
+import 'package:auto_securo_admin/VehicleInfo.dart';
 import 'package:auto_securo_admin/globals.dart';
+import 'package:auto_securo_admin/services/database_services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
@@ -12,20 +14,38 @@ class _HomePageState extends State<HomePage> {
 
   bool noVehicles = false;     //to be checked in initstate
   String societyName;            //initialize in initstate
-  bool dataLoaded = true;
+  bool dataLoaded = false;
 
-  //All these lists filled in initstate
-  List vehicleNames=["Lamborghini","Jaguar"];
-  List vehicleNumberplates=["DL4CAC0001","888JXJ"];
-  List ownerNames=["Sahil Chawla","Sahil Chawla"];
-
-  //filled in init
-  List vehicleList=[new VehicleInfo("Lamborghini", "DL4CAC0001", "Sahil Chawla", DateTime.now().toString()),new VehicleInfo("Jaguar", "888JXJ", "Sahil Chawla", DateTime.now().toString())];
+//filled in init
+//  List vehicleList=[new VehicleInfo("Lamborghini", "DL4CAC0001", "Sahil Chawla", DateTime.now().toString()),
+//    new VehicleInfo("Jaguar", "888JXJ", "Sahil Chawla", DateTime.now().toString())];
+  List<VehicleInfo> vehicleList=[];
 
   @override
   void initState() {
     societyName = "Chander Nagar, Janakpuri";
+
+    getHistory();
+
     super.initState();
+  }
+
+  Future<void> getHistory() async{
+    vehicleList = await  DatabaseService().getHistory();
+    if(vehicleList.length==0)
+      {
+        setState(() {
+          noVehicles = true;
+          dataLoaded = true;
+        });
+      }
+    else
+      {
+        setState(() {
+          noVehicles = false;
+          dataLoaded = true;
+        });
+      }
   }
 
   @override
@@ -92,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                   physics: AlwaysScrollableScrollPhysics(),
-                  itemCount: vehicleNames.length,
+                  itemCount: vehicleList.length,
                   itemBuilder: (context, index) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,6 +127,21 @@ class _HomePageState extends State<HomePage> {
                               thickness:2.5,
                               color: Colors.black,
 
+                            ),
+                          ),
+                        ),
+                        SizedBox(height:MediaQuery.of(context).size.height*0.04),
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              text: 'User: ',
+                              style: TextStyle(color: Colors.black,fontFamily: 'Montserrat',fontWeight: FontWeight.bold,fontSize: 17),
+                              children: <TextSpan>[
+                                TextSpan(text: vehicleList[index].userName, style: TextStyle(fontWeight: FontWeight.normal,fontSize: 17)),
+
+                              ],
                             ),
                           ),
                         ),
@@ -179,18 +214,5 @@ class _HomePageState extends State<HomePage> {
         )
       ),
     );
-  }
-}
-class VehicleInfo {
-  String name;
-  String numberPlate;
-  String ownerName;
-  String timeStamp;
-  VehicleInfo(name,numberPlate,ownerName,timeStamp)
-  {
-    this.name = name;
-    this.numberPlate = numberPlate;
-    this.ownerName = ownerName;
-    this.timeStamp = timeStamp;
   }
 }
