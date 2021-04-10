@@ -34,33 +34,36 @@ class HistoryPreview extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 6.0.h),
             child: Padding(
               padding: const EdgeInsets.all(3.0),
-              child: FittedBox(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FittedBox(
+                    fit:BoxFit.scaleDown,
+                    child: Text(
                       '$startTime',
+                      maxLines:3,
                       style: TextStyle(
                           color: Colors.black87,
                           fontWeight: FontWeight.w700,
+
                           fontSize: 14.0.sp),
                     ),
-                    // Text(
-                    //   startTime != null ? 'to' : 'By',
-                    //   style: TextStyle(
-                    //     color: Colors.black87,
-                    //     fontWeight: FontWeight.w500,
-                    //   ),
-                    // ),
-                    // Text(
-                    //   '$endTime',
-                    //   style: TextStyle(
-                    //     color: Colors.black87,
-                    //     fontWeight: FontWeight.w500,
-                    //   ),
-                    // ),
-                  ],
-                ),
+                  ),
+                  // Text(
+                  //   startTime != null ? 'to' : 'By',
+                  //   style: TextStyle(
+                  //     color: Colors.black87,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ),
+                  // Text(
+                  //   '$endTime',
+                  //   style: TextStyle(
+                  //     color: Colors.black87,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ),
+                ],
               ),
             ),
             height: 55.h,
@@ -81,71 +84,100 @@ class HistoryPreview extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(
                   top: 10.h, bottom: 10.h, left: 15.w, right: 15.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              'USER: $username',
-                              overflow: TextOverflow.fade,
-                              maxLines: 1,
-                              softWrap: false,
-                              style: TextStyle(
+              child: Flexible(
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: 'User: ',
+                            style: TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16.0.sp,
-                              ),
-                            ),
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: username,
+                                  style: TextStyle(
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontSize: 17)),
+                            ],
                           ),
-                          Flexible(
-                            child: Text(
-                              'Numberplate: $vehicleNo',
-                              overflow: TextOverflow.fade,
-                              maxLines: 2,
-                              softWrap: true,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15.0.sp,
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Flexible(
-                              child: Text(
-                                'Vehicle: $vehicleName',
-                                overflow: TextOverflow.fade,
-                                maxLines: 1,
-                                softWrap: false,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0.sp,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Text(
-                              'Owner Name: $vehicleOwner',
-                              overflow: TextOverflow.fade,
-                              maxLines: 1,
-                              softWrap: false,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.0.sp,
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      Container(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: 'Vehicle: ',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text:
+                                  vehicleName,
+                                  style: TextStyle(
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontSize: 17)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: 'Numberplate: ',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: vehicleNo,
+                                  style: TextStyle(
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontSize: 17)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: 'Owner Name: ',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: vehicleOwner,
+                                  style: TextStyle(
+                                      fontWeight:
+                                      FontWeight.normal,
+                                      fontSize: 17)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
             height: 183.h,

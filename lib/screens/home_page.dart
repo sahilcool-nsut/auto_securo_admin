@@ -136,183 +136,188 @@ class _HomePageState extends State<HomePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        // HistoryPreview(
-                                        //     startTime: '9:00',
-                                        //     username: 'Shubh',
-                                        //     vehicleNo: 'DL9CQS5290',
-                                        //     vehicleName: 'Maruti',
-                                        //     vehicleOwner: 'Gupta'),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.03),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.02),
-                                        Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 16.0),
-                                            child: Divider(
-                                              height: 2,
-                                              thickness: 2.5,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.04),
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: RichText(
-                                            textAlign: TextAlign.center,
-                                            text: TextSpan(
-                                              text: 'User: ',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: 'Montserrat',
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 17),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                    text: vehicleList[index]
-                                                        .userName,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontSize: 17)),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.04),
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: RichText(
-                                            textAlign: TextAlign.center,
-                                            text: TextSpan(
-                                              text: 'Vehicle: ',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: 'Montserrat',
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 17),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                    text:
-                                                        vehicleList[index].name,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontSize: 17)),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.01),
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: RichText(
-                                            textAlign: TextAlign.center,
-                                            text: TextSpan(
-                                              text: 'Vehicle Numberplate: ',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: 'Montserrat',
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 17),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                    text: vehicleList[index]
-                                                        .numberPlate,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontSize: 17)),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.01),
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: RichText(
-                                            textAlign: TextAlign.center,
-                                            text: TextSpan(
-                                              text: 'Owner Name: ',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: 'Montserrat',
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 17),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                    text: vehicleList[index]
-                                                        .ownerName,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontSize: 17)),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.01),
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: RichText(
-                                            textAlign: TextAlign.center,
-                                            text: TextSpan(
-                                              text: 'Date and Time: ',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: 'Montserrat',
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 17),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                    text: formatDate(
-                                                        DateTime.now(), [
-                                                      dd,
-                                                      '/',
-                                                      mm,
-                                                      '/',
-                                                      yyyy,
-                                                      ', ',
-                                                      HH,
-                                                      ':',
-                                                      nn,
-                                                    ]).toString(),
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        fontSize: 17)),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                                         HistoryPreview(
+                                             startTime: vehicleList[index]
+                                                 .timeStamp,
+                                             username: vehicleList[index]
+                                                 .userName,
+                                             vehicleNo: vehicleList[index]
+                                                 .numberPlate,
+                                             vehicleName: vehicleList[index]
+                                                 .name,
+                                             vehicleOwner:vehicleList[index]
+                                                 .ownerName),
+//                                        SizedBox(
+//                                            height: MediaQuery.of(context)
+//                                                    .size
+//                                                    .height *
+//                                                0.03),
+//                                        SizedBox(
+//                                            height: MediaQuery.of(context)
+//                                                    .size
+//                                                    .height *
+//                                                0.02),
+//                                        Center(
+//                                          child: Padding(
+//                                            padding: EdgeInsets.symmetric(
+//                                                horizontal: 16.0),
+//                                            child: Divider(
+//                                              height: 2,
+//                                              thickness: 2.5,
+//                                              color: Colors.black,
+//                                            ),
+//                                          ),
+//                                        ),
+//                                        SizedBox(
+//                                            height: MediaQuery.of(context)
+//                                                    .size
+//                                                    .height *
+//                                                0.04),
+//                                        FittedBox(
+//                                          fit: BoxFit.scaleDown,
+//                                          child: RichText(
+//                                            textAlign: TextAlign.center,
+//                                            text: TextSpan(
+//                                              text: 'User: ',
+//                                              style: TextStyle(
+//                                                  color: Colors.black,
+//                                                  fontFamily: 'Montserrat',
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 17),
+//                                              children: <TextSpan>[
+//                                                TextSpan(
+//                                                    text: vehicleList[index]
+//                                                        .userName,
+//                                                    style: TextStyle(
+//                                                        fontWeight:
+//                                                            FontWeight.normal,
+//                                                        fontSize: 17)),
+//                                              ],
+//                                            ),
+//                                          ),
+//                                        ),
+//                                        SizedBox(
+//                                            height: MediaQuery.of(context)
+//                                                    .size
+//                                                    .height *
+//                                                0.04),
+//                                        FittedBox(
+//                                          fit: BoxFit.scaleDown,
+//                                          child: RichText(
+//                                            textAlign: TextAlign.center,
+//                                            text: TextSpan(
+//                                              text: 'Vehicle: ',
+//                                              style: TextStyle(
+//                                                  color: Colors.black,
+//                                                  fontFamily: 'Montserrat',
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 17),
+//                                              children: <TextSpan>[
+//                                                TextSpan(
+//                                                    text:
+//                                                        vehicleList[index].name,
+//                                                    style: TextStyle(
+//                                                        fontWeight:
+//                                                            FontWeight.normal,
+//                                                        fontSize: 17)),
+//                                              ],
+//                                            ),
+//                                          ),
+//                                        ),
+//                                        SizedBox(
+//                                            height: MediaQuery.of(context)
+//                                                    .size
+//                                                    .height *
+//                                                0.01),
+//                                        FittedBox(
+//                                          fit: BoxFit.scaleDown,
+//                                          child: RichText(
+//                                            textAlign: TextAlign.center,
+//                                            text: TextSpan(
+//                                              text: 'Vehicle Numberplate: ',
+//                                              style: TextStyle(
+//                                                  color: Colors.black,
+//                                                  fontFamily: 'Montserrat',
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 17),
+//                                              children: <TextSpan>[
+//                                                TextSpan(
+//                                                    text: vehicleList[index]
+//                                                        .numberPlate,
+//                                                    style: TextStyle(
+//                                                        fontWeight:
+//                                                            FontWeight.normal,
+//                                                        fontSize: 17)),
+//                                              ],
+//                                            ),
+//                                          ),
+//                                        ),
+//                                        SizedBox(
+//                                            height: MediaQuery.of(context)
+//                                                    .size
+//                                                    .height *
+//                                                0.01),
+//                                        FittedBox(
+//                                          fit: BoxFit.scaleDown,
+//                                          child: RichText(
+//                                            textAlign: TextAlign.center,
+//                                            text: TextSpan(
+//                                              text: 'Owner Name: ',
+//                                              style: TextStyle(
+//                                                  color: Colors.black,
+//                                                  fontFamily: 'Montserrat',
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 17),
+//                                              children: <TextSpan>[
+//                                                TextSpan(
+//                                                    text: vehicleList[index]
+//                                                        .ownerName,
+//                                                    style: TextStyle(
+//                                                        fontWeight:
+//                                                            FontWeight.normal,
+//                                                        fontSize: 17)),
+//                                              ],
+//                                            ),
+//                                          ),
+//                                        ),
+//                                        SizedBox(
+//                                            height: MediaQuery.of(context)
+//                                                    .size
+//                                                    .height *
+//                                                0.01),
+//                                        FittedBox(
+//                                          fit: BoxFit.scaleDown,
+//                                          child: RichText(
+//                                            textAlign: TextAlign.center,
+//                                            text: TextSpan(
+//                                              text: 'Date and Time: ',
+//                                              style: TextStyle(
+//                                                  color: Colors.black,
+//                                                  fontFamily: 'Montserrat',
+//                                                  fontWeight: FontWeight.bold,
+//                                                  fontSize: 17),
+//                                              children: <TextSpan>[
+//                                                TextSpan(
+//                                                    text: formatDate(
+//                                                        DateTime.now(), [
+//                                                      dd,
+//                                                      '/',
+//                                                      mm,
+//                                                      '/',
+//                                                      yyyy,
+//                                                      ', ',
+//                                                      HH,
+//                                                      ':',
+//                                                      nn,
+//                                                    ]).toString(),
+//                                                    style: TextStyle(
+//                                                        fontWeight:
+//                                                            FontWeight.normal,
+//                                                        fontSize: 17)),
+//                                              ],
+//                                            ),
+//                                          ),
+//                                        ),
                                       ],
                                     );
                                   }),

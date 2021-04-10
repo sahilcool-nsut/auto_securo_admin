@@ -67,5 +67,34 @@ class DatabaseService {
     });
 
   }
+  Future<bool> checkUserExists (String phoneNumber)async
+  {
+    var doc = await usersCollection.doc(phoneNumber).get();
+    if(doc.exists)
+      {
+        return true;
+      }
+    return false;
+  }
 
+  Future<bool> linkVehicle(String phoneNumber, String numberPlate,String vehicleName, String vehiclePhoto) async
+  {
+    await usersCollection.doc(phoneNumber).collection("vehicles").add({
+      'numberPlate':numberPlate,
+      'owner':true,
+    });
+    var data = await usersCollection.doc(phoneNumber).get();
+
+    await vehiclesCollection.doc(numberPlate).set({
+      'numberPlate':numberPlate,
+      'ownerName':data.data()["fullName"],
+      'ownerPhone':phoneNumber,
+      'vehicleName':vehicleName,
+      'vehiclePhoto':vehiclePhoto,
+    });
+    await vehiclesCollection.doc(numberPlate).collection('users').add({
+      'owner':true,
+      'phoneNumber':phoneNumber,
+    });
+  }
 }
