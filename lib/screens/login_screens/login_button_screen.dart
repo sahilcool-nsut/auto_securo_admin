@@ -40,11 +40,11 @@ class _LoginButtonState extends State<LoginButton> {
                             type: PageTransitionType.fade));
                   },
                   child: Container(
-                    padding: EdgeInsets.all(8),
+                    padding: EdgeInsets.all(16),
                     child: Center(
                       child: Text(
                         'Login',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: TextStyle(fontSize: 19, color: Colors.white),
                       ),
                     ),
                     decoration: BoxDecoration(

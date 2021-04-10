@@ -25,8 +25,8 @@ class _QRScannerState extends State<QRScanner> {
   void reassemble() {
     super.reassemble();
     if (Platform.isAndroid) {
-     // controller.pauseCamera();
-     // controllerPaused = true;
+      // controller.pauseCamera();
+      // controllerPaused = true;
     } else if (Platform.isIOS) {
       controller.resumeCamera();
       controllerPaused = false;
@@ -43,7 +43,9 @@ class _QRScannerState extends State<QRScanner> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: myAppBar,
+        appBar: AppBar(
+          title: Text('Scan QR'),
+        ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 36.0),
           child: ListView(
@@ -76,7 +78,6 @@ class _QRScannerState extends State<QRScanner> {
                     ),
                   ),
                   SizedBox(height: 20),
-
                   result != null
                       ? Column(
                           children: [
@@ -84,9 +85,12 @@ class _QRScannerState extends State<QRScanner> {
                             SizedBox(height: 30),
                             Visibility(
                               visible: showConfirmation,
-                              child: Text("Notification Sent!!",style: TextStyle(color: Colors.green),),
+                              child: Text(
+                                "Notification Sent!!",
+                                style: TextStyle(color: Colors.green),
+                              ),
                             ),
-                            SizedBox(height:10),
+                            SizedBox(height: 10),
                             result.code.contains("Scanned by Auto Securo")
                                 ? InkWell(
                                     onTap: _sendNotification,
@@ -103,7 +107,6 @@ class _QRScannerState extends State<QRScanner> {
                           ],
                         )
                       : Text("Scan the QR"),
-
                 ],
               )
             ],
@@ -152,25 +155,27 @@ class _QRScannerState extends State<QRScanner> {
     String str = result.code;
     print(str);
     str = str.substring("Scanned by Auto Securo.".length);
-    String userName = str.substring(0,str.indexOf("contact"));
+    String userName = str.substring(0, str.indexOf("contact"));
     userName = userName.trim();
 
     print(userName);
 
-    str = str.substring(str.indexOf("contact number:") + "contact number:".length);
-    String phoneNumber = str.substring(0,str.indexOf("took"));
+    str = str
+        .substring(str.indexOf("contact number:") + "contact number:".length);
+    String phoneNumber = str.substring(0, str.indexOf("took"));
     phoneNumber = phoneNumber.trim();
 
     print(phoneNumber);
 
-    str = str.substring(str.indexOf("took the vehicle:") + "took the vehicle:".length);
-    String vehicleName = str.substring(0,str.indexOf("numberplate"));
+    str = str.substring(
+        str.indexOf("took the vehicle:") + "took the vehicle:".length);
+    String vehicleName = str.substring(0, str.indexOf("numberplate"));
     vehicleName = vehicleName.trim();
 
     print(vehicleName);
 
     str = str.substring(str.indexOf("numberplate:") + "numberplate:".length);
-    String numberPlate = str.substring(0,str.indexOf("on"));
+    String numberPlate = str.substring(0, str.indexOf("on"));
     numberPlate = numberPlate.trim();
 
     print(numberPlate);
@@ -181,7 +186,8 @@ class _QRScannerState extends State<QRScanner> {
 
     print(timeStamp);
 
-    await DatabaseService().sendNotification(userName,vehicleName,numberPlate,phoneNumber,timeStamp);
+    await DatabaseService().sendNotification(
+        userName, vehicleName, numberPlate, phoneNumber, timeStamp);
     print("sent");
     setState(() {
       showConfirmation = true;
