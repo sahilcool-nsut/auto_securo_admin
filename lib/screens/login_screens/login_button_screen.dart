@@ -1,5 +1,8 @@
+import 'package:auto_securo_admin/screens/login_screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+
+import '../../NavBar.dart';
 
 class LoginButton extends StatefulWidget {
   @override
@@ -16,9 +19,12 @@ class _LoginButtonState extends State<LoginButton> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Text(
                 'Login to access admin portal of Auto Securo',
-                style: TextStyle(fontSize: 17),
+                style: TextStyle(fontSize: 20),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.4,
@@ -26,6 +32,13 @@ class _LoginButtonState extends State<LoginButton> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            child: LoginScreen(),
+                            type: PageTransitionType.fade));
+                  },
                   child: Container(
                     padding: EdgeInsets.all(8),
                     child: Center(

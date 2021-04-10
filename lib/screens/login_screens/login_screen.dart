@@ -1,6 +1,7 @@
 import 'package:auto_securo_admin/screens/navbar_screens/QRScanner.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../NavBar.dart';
 
@@ -10,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  FirebaseAuth auth = FirebaseAuth.instance;
   bool passwordVisible = false;
   TextEditingController _userIdController;
   TextEditingController _passwordController;
@@ -24,9 +26,33 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
   }
 
-  void _submitLoginDetails(String userId, String password) {
-    Navigator.push(context,
-        PageTransition(child: NavBar(), type: PageTransitionType.fade));
+  @override
+  void dispose() {
+    _userIdController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _submitLoginDetails(String userId, String password) async {
+    try {
+      await auth.signInWithEmailAndPassword(
+        email: _userIdController.text,
+        password: _passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+    Navigator.push(
+        context,
+        PageTransition(
+            child: NavBar(
+              currentPage: 2,
+            ),
+            type: PageTransitionType.fade));
   }
 
   @override
@@ -38,25 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Align(
-              //   alignment: Alignment.topRight,
-              //   child: InkWell(
-              //     onTap: () {
-              //       Navigator.push(
-              //           context,
-              //           PageTransition(
-              //               child: QRScanner(), type: PageTransitionType.fade));
-              //     },
-              //     child: Container(
-              //       padding: EdgeInsets.all(12.0),
-              //       color: Colors.red,
-              //       child: Text(
-              //         "Scanner",
-              //         style: TextStyle(color: Colors.white),
-              //       ),
-              //     ),
-              //   ),
-              // ),
               Container(
                 child: Text(
                   'Hello,',
@@ -79,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: InputDecoration(
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   border: OutlineInputBorder(),
-                  labelText: 'User ID',
+                  labelText: 'User Email-ID',
                 ),
                 controller: _userIdController,
               ),
