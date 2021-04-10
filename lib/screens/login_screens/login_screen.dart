@@ -2,6 +2,7 @@ import 'package:auto_securo_admin/screens/navbar_screens/QRScanner.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:auto_securo_admin/globals.dart' as globals;
 
 import '../../NavBar.dart';
 
@@ -39,6 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _userIdController.text,
         password: _passwordController.text,
       );
+      globals.user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');

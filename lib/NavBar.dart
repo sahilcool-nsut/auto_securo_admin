@@ -3,14 +3,15 @@ import 'package:auto_securo_admin/screens/login_screens/login_screen.dart';
 import 'package:auto_securo_admin/screens/navbar_screens/link_vehicle.dart';
 import 'package:flutter/material.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
+import 'package:auto_securo_admin/globals.dart' as globals;
 
 import 'screens/navbar_screens/QRScanner.dart';
 import 'screens/home_page.dart';
 
 class NavBar extends StatefulWidget {
-   final int currentPage;
+  final int currentPage;
 
-   NavBar({this.currentPage});
+  NavBar({this.currentPage});
 
   @override
   _NavBarState createState() => _NavBarState();
@@ -26,7 +27,6 @@ class _NavBarState extends State<NavBar> {
   //   }
   // }
   int currentPageLocal;
-
 
   GlobalKey bottomNavigationKey = GlobalKey();
   @override
@@ -86,7 +86,7 @@ class _NavBarState extends State<NavBar> {
       case 1:
         return HomePage();
       default:
-        return LoginButton();
+        return globals.user == null ? LoginButton() : LinkVehicle();
     }
   }
 }

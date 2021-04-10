@@ -25,24 +25,21 @@ class _LinkVehicleState extends State<LinkVehicle> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: myAppBar,
+        appBar: AppBar(
+          title: Text('Link Vehicle'),
+        ),
         body: Padding(
             padding: EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 50),
-                  Text(
-                    "Link Vehicle",
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
                   Text(
                     "Vehicle Number: ",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   TextFormField(
                     decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -58,7 +55,7 @@ class _LinkVehicleState extends State<LinkVehicle> {
                     "Mobile Number: ",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   TextFormField(
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
