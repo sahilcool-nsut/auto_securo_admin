@@ -1,3 +1,4 @@
+import 'package:auto_securo_admin/screens/camera_screen2.dart';
 import 'package:auto_securo_admin/screens/login_screens/login_button_screen.dart';
 import 'package:auto_securo_admin/screens/login_screens/login_screen.dart';
 import 'package:auto_securo_admin/screens/navbar_screens/link_vehicle.dart';
@@ -57,6 +58,7 @@ class _NavBarState extends State<NavBar> {
             //   ),
             // ),
           ),
+          TabData(iconData: Icons.camera_enhance, title: 'Numberplate Scanner'),
           TabData(
             iconData: Icons.home,
             title: "Home",
@@ -84,6 +86,8 @@ class _NavBarState extends State<NavBar> {
       case 0:
         return QRScanner();
       case 1:
+        return CameraScreen2();
+      case 2:
         return HomePage();
       default:
         return globals.user == null ? LoginButton() : LinkVehicle();
