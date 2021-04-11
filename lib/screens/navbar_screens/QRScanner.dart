@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_securo_admin/services/database_services.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -180,14 +181,10 @@ class _QRScannerState extends State<QRScanner> {
 
     print(numberPlate);
 
-    str = str.substring(str.indexOf("time:") + "time:".length);
-    String timeStamp = str.substring(0);
-    timeStamp = timeStamp.trim();
-
-    print(timeStamp);
+     String timeStamp = formatDate(DateTime.now(), [dd, '/',mm, '/', yyyy, ', ',HH, ':', nn,]).toString();
 
     await DatabaseService().sendNotification(
-        userName, vehicleName, numberPlate, phoneNumber, timeStamp);
+        userName, vehicleName, numberPlate, phoneNumber,timeStamp);
     print("sent");
     setState(() {
       showConfirmation = true;

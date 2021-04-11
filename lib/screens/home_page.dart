@@ -126,27 +126,53 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               ),
+                              SizedBox(
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height *
+                                      0.03),
+                              SizedBox(
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height *
+                                      0.02),
                               ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
-                                  physics: AlwaysScrollableScrollPhysics(),
+                                  physics: NeverScrollableScrollPhysics(),
                                   itemCount: vehicleList.length,
                                   itemBuilder: (context, index) {
                                     return Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                         HistoryPreview(
-                                             startTime: vehicleList[index]
-                                                 .timeStamp,
-                                             username: vehicleList[index]
-                                                 .userName,
-                                             vehicleNo: vehicleList[index]
-                                                 .numberPlate,
-                                             vehicleName: vehicleList[index]
-                                                 .name,
-                                             vehicleOwner:vehicleList[index]
-                                                 .ownerName),
+
+                                    Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 16.0),
+                                            child: Divider(
+                                              height: 2,
+                                              thickness: 2.5,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+
+                                         Center(
+                                           child: HistoryPreview(
+                                               startTime: vehicleList[index]
+                                                   .timeStamp,
+                                               username: vehicleList[index]
+                                                   .userName,
+                                               vehicleNo: vehicleList[index]
+                                                   .numberPlate,
+                                               vehicleName: vehicleList[index]
+                                                   .name,
+                                               vehicleOwner:vehicleList[index]
+                                                   .ownerName
+                                              ),
+                                         ),
 //                                        SizedBox(
 //                                            height: MediaQuery.of(context)
 //                                                    .size

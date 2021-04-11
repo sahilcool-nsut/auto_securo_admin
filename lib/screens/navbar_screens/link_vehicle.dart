@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../globals.dart';
 
@@ -290,7 +291,7 @@ class _LinkVehicleState extends State<LinkVehicle> {
     var user = FirebaseAuth.instance.currentUser;
     var storageRef = FirebaseStorage.instance
         .ref()
-        .child("${user.email}/profilepic/profilepic");
+        .child("images/${Uuid().v1()}");
     var uploadTask = await storageRef.putFile(file).whenComplete(() async {
       print(storageRef.getDownloadURL());
     });

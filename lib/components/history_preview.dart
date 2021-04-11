@@ -30,153 +30,122 @@ class HistoryPreview extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 6.0.h),
-            child: Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  FittedBox(
-                    fit:BoxFit.scaleDown,
-                    child: Text(
-                      '$startTime',
-                      maxLines:3,
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w700,
-
-                          fontSize: 14.0.sp),
-                    ),
-                  ),
-                  // Text(
-                  //   startTime != null ? 'to' : 'By',
-                  //   style: TextStyle(
-                  //     color: Colors.black87,
-                  //     fontWeight: FontWeight.w500,
-                  //   ),
-                  // ),
-                  // Text(
-                  //   '$endTime',
-                  //   style: TextStyle(
-                  //     color: Colors.black87,
-                  //     fontWeight: FontWeight.w500,
-                  //   ),
-                  // ),
-                ],
-              ),
-            ),
-            height: 55.h,
-            width: 55.h,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.red,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(8.0),
-              color: Colors.white,
-            ),
-          ),
-          SizedBox(
-            width: 25.0.w,
-          ),
-          Container(
+                    Container(
             child: Padding(
               padding: EdgeInsets.only(
                   top: 10.h, bottom: 10.h, left: 15.w, right: 15.w),
-              child: Flexible(
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: 'User: ',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: username,
-                                  style: TextStyle(
-                                      fontWeight:
-                                      FontWeight.normal,
-                                      fontSize: 17)),
-                            ],
-                          ),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: 'User: ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: username,
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.normal,
+                                    fontSize: 15)),
+                          ],
                         ),
                       ),
-                      Container(
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: 'Vehicle: ',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text:
-                                  vehicleName,
-                                  style: TextStyle(
-                                      fontWeight:
-                                      FontWeight.normal,
-                                      fontSize: 17)),
-                            ],
-                          ),
+                    ),
+                    Container(
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: 'Vehicle: ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text:
+                                vehicleName,
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.normal,
+                                    fontSize: 15)),
+                          ],
                         ),
                       ),
-                      Container(
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: 'Numberplate: ',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: vehicleNo,
-                                  style: TextStyle(
-                                      fontWeight:
-                                      FontWeight.normal,
-                                      fontSize: 17)),
-                            ],
-                          ),
+                    ),
+                    Container(
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: 'Numberplate: ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: vehicleNo,
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.normal,
+                                    fontSize: 15)),
+                          ],
                         ),
                       ),
-                      Container(
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: 'Owner Name: ',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: vehicleOwner,
-                                  style: TextStyle(
-                                      fontWeight:
-                                      FontWeight.normal,
-                                      fontSize: 17)),
-                            ],
-                          ),
+                    ),
+                    Container(
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: 'Owner Name: ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: vehicleOwner,
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.normal,
+                                    fontSize: 15)),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: 'Time: ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: startTime,
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.normal,
+                                    fontSize: 15)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -18,6 +18,8 @@ dependencies:
   qr_code_scanner: ^0.4.0
   flutter_screenutil: ^5.0.0
   image_picker: ^0.7.4
+  http: ^0.13.1
+  uuid: ^3.0.4
   camera: ^0.8.1
   path_provider: ^2.0.1
   intl: ^0.17.0
