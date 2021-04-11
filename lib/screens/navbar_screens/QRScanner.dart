@@ -73,6 +73,7 @@ class _QRScannerState extends State<QRScanner> {
                           onTap: () {
                             controller.resumeCamera();
                             setState(() {
+                              showConfirmation = false;
                               controllerPaused = false;
                             });
                           }),
@@ -181,10 +182,20 @@ class _QRScannerState extends State<QRScanner> {
 
     print(numberPlate);
 
-     String timeStamp = formatDate(DateTime.now(), [dd, '/',mm, '/', yyyy, ', ',HH, ':', nn,]).toString();
+    String timeStamp = formatDate(DateTime.now(), [
+      dd,
+      '/',
+      mm,
+      '/',
+      yyyy,
+      ', ',
+      HH,
+      ':',
+      nn,
+    ]).toString();
 
     await DatabaseService().sendNotification(
-        userName, vehicleName, numberPlate, phoneNumber,timeStamp);
+        userName, vehicleName, numberPlate, phoneNumber, timeStamp);
     print("sent");
     setState(() {
       showConfirmation = true;

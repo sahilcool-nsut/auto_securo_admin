@@ -53,6 +53,7 @@ class _LinkVehicleState extends State<LinkVehicle> {
                   ),
                   SizedBox(height: 10),
                   TextFormField(
+                    textCapitalization: TextCapitalization.characters,
                     decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
                       border: OutlineInputBorder(),
@@ -92,7 +93,7 @@ class _LinkVehicleState extends State<LinkVehicle> {
                       labelText: 'Enter your vehicle name',
                       hintText: 'For ex. Honda City',
                       hintStyle:
-                      TextStyle(color: Colors.black.withOpacity(0.2)),
+                          TextStyle(color: Colors.black.withOpacity(0.2)),
                     ),
                     controller: _vehicleNameController,
                   ),
@@ -103,41 +104,40 @@ class _LinkVehicleState extends State<LinkVehicle> {
                     children: <Widget>[
                       Container(
                         height: MediaQuery.of(context).size.height * 0.3,
-                        width:  double.infinity,
+                        width: double.infinity,
                         child: _photoURL == null
                             ? Container(
-                                height: MediaQuery.of(context).size.height * 0.3,
-                                width:   double.infinity,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.3,
+                                width: double.infinity,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: ExactAssetImage(
-                                          'images/linkPNG.png'),
-                                      fit: BoxFit.cover,
-                                    )))
+                                  image: ExactAssetImage('images/linkPNG.png'),
+                                  fit: BoxFit.cover,
+                                )))
                             : CachedNetworkImage(
-                              imageUrl: _photoURL,
-                              imageBuilder:
-                                  (context, imageProvider) =>
-                                  Container(
-                                    height: MediaQuery.of(context).size.height * 0.3,
-                                    width:  MediaQuery.of(context).size.width * 0.5,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
-                                      ),
+                                imageUrl: _photoURL,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.3,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                              placeholder: (context, url) =>
-                                  CircularProgressIndicator(),
-                              errorWidget:
-                                  (context, url, error) =>
-                                  Icon(Icons.error),
-                            ),
+                                ),
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
                       ),
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Expanded(
                             flex: 3,
@@ -150,19 +150,14 @@ class _LinkVehicleState extends State<LinkVehicle> {
                               radius: 25.0,
                               child: InkWell(
                                 onTap: () async {
-                                  final pickedFile =
-                                  await ImagePicker()
+                                  final pickedFile = await ImagePicker()
                                       .getImage(
-                                      source:
-                                      ImageSource
-                                          .gallery,
-                                      imageQuality: 65);
+                                          source: ImageSource.gallery,
+                                          imageQuality: 65);
                                   if (pickedFile != null) {
-                                    File image =
-                                    File(pickedFile.path);
+                                    File image = File(pickedFile.path);
                                     //have to implement
-                                    _photoURL =
-                                          await uploadFile(image);
+                                    _photoURL = await uploadFile(image);
                                     setState(() {});
                                   }
                                 },
@@ -182,7 +177,7 @@ class _LinkVehicleState extends State<LinkVehicle> {
                               child: InkWell(
                                 onTap: () async {
                                   // for dialog
-                                   _showMyDialog();
+                                  _showMyDialog();
                                 },
                                 child: Icon(
                                   Icons.delete_outline,
@@ -219,7 +214,8 @@ class _LinkVehicleState extends State<LinkVehicle> {
                         _loading = true;
                       });
                       //Check if user account exists (traverse through collections)
-                      _userExists = await DatabaseService().checkUserExists(_mobileNumberController.text);
+                      _userExists = await DatabaseService()
+                          .checkUserExists(_mobileNumberController.text);
                       if (!_userExists) {
                         setState(() {
                           _loading = false;
@@ -229,7 +225,11 @@ class _LinkVehicleState extends State<LinkVehicle> {
                       } else {
                         // Link Vehicle -> Add vehicle in user collection, and in vehicle collection, add user mobile number with tag owner = true
 
-                        bool success = await DatabaseService().linkVehicle(_mobileNumberController.text,_numberPlateController.text,_vehicleNameController.text,_photoURL);
+                        bool success = await DatabaseService().linkVehicle(
+                            _mobileNumberController.text,
+                            _numberPlateController.text,
+                            _vehicleNameController.text,
+                            _photoURL);
 
                         setState(() {
                           _loading = false;
@@ -289,9 +289,8 @@ class _LinkVehicleState extends State<LinkVehicle> {
 
   Future<String> uploadFile(File file) async {
     var user = FirebaseAuth.instance.currentUser;
-    var storageRef = FirebaseStorage.instance
-        .ref()
-        .child("images/${Uuid().v1()}");
+    var storageRef =
+        FirebaseStorage.instance.ref().child("images/${Uuid().v1()}");
     var uploadTask = await storageRef.putFile(file).whenComplete(() async {
       print(storageRef.getDownloadURL());
     });
@@ -350,5 +349,4 @@ class _LinkVehicleState extends State<LinkVehicle> {
       Scaffold.of(context).showSnackBar(snackBar);
     }
   }
-
 }

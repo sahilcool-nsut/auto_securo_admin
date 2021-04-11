@@ -4,12 +4,14 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:date_format/date_format.dart';
+
 class CameraScreen2 extends StatefulWidget {
   @override
   _CameraScreen2State createState() => _CameraScreen2State();
 }
 
 class _CameraScreen2State extends State<CameraScreen2> {
+  bool showConfirmation = false;
   String mailAddress = '';
   CameraController _camera;
   bool _isDetecting = false;
@@ -70,9 +72,8 @@ class _CameraScreen2State extends State<CameraScreen2> {
   }
 
   void getWords(VisionText visionText) {
-
-
-    RegExp regEx = RegExp("^[A-Z]{0,5}[0-9A-Z]{1,2}[A-Z]{2}[0-9]{4}\$",caseSensitive: true);
+    RegExp regEx = RegExp("^[A-Z]{0,5}[0-9A-Z]{1,2}[A-Z]{2}[0-9]{4}\$",
+        caseSensitive: true);
     for (TextBlock block in visionText.blocks) {
       for (TextLine line in block.lines) {
         String temp = line.text.replaceAll(' ', '');
@@ -110,10 +111,17 @@ class _CameraScreen2State extends State<CameraScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Numberplate Scanner'),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_camera == null) {
             _initializeCamera();
+            mailAddress = '';
+            setState(() {
+              showConfirmation = false;
+            });
           } else {
             print('pressed');
             _camera.stopImageStream();
@@ -139,9 +147,34 @@ class _CameraScreen2State extends State<CameraScreen2> {
                     SizedBox(
                       height: 10,
                     ),
+                    Visibility(
+                      visible: showConfirmation,
+                      child: Text(
+                        "Notification Sent!!",
+                        style: TextStyle(color: Colors.green),
+                      ),
+                    ),
                     OutlinedButton(
                       onPressed: () async {
-                         await DatabaseService().sendNotification('custom', 'custom',mailAddress, 'custom', formatDate(DateTime.now(), [dd, '/',mm, '/', yyyy, ', ',HH, ':', nn,]).toString());
+                        await DatabaseService().sendNotification(
+                            'custom',
+                            'custom',
+                            mailAddress,
+                            'custom',
+                            formatDate(DateTime.now(), [
+                              dd,
+                              '/',
+                              mm,
+                              '/',
+                              yyyy,
+                              ', ',
+                              HH,
+                              ':',
+                              nn,
+                            ]).toString());
+                        setState(() {
+                          showConfirmation = true;
+                        });
                       },
                       child: Text('Send notification'),
                     )
@@ -153,7 +186,10 @@ class _CameraScreen2State extends State<CameraScreen2> {
                       width: double.infinity,
                       child: CameraPreview(_camera),
                     ),
-                    Text(mailAddress,style: TextStyle(color: Colors.black,fontSize: 17),),
+                    Text(
+                      mailAddress,
+                      style: TextStyle(color: Colors.black, fontSize: 17),
+                    ),
                   ],
                 ),
           _camera != null ? _buildResults(_textScanResults) : Container(),

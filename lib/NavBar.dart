@@ -58,7 +58,7 @@ class _NavBarState extends State<NavBar> {
             //   ),
             // ),
           ),
-          TabData(iconData: Icons.camera_enhance, title: 'Numberplate Scanner'),
+          TabData(iconData: Icons.camera_enhance, title: 'Custom'),
           TabData(
             iconData: Icons.home,
             title: "Home",

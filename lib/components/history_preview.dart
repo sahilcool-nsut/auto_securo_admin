@@ -30,7 +30,7 @@ class HistoryPreview extends StatelessWidget {
       ),
       child: Row(
         children: [
-                    Container(
+          Container(
             child: Padding(
               padding: EdgeInsets.only(
                   top: 10.h, bottom: 10.h, left: 15.w, right: 15.w),
@@ -53,8 +53,7 @@ class HistoryPreview extends StatelessWidget {
                             TextSpan(
                                 text: username,
                                 style: TextStyle(
-                                    fontWeight:
-                                    FontWeight.normal,
+                                    fontWeight: FontWeight.normal,
                                     fontSize: 15)),
                           ],
                         ),
@@ -72,11 +71,9 @@ class HistoryPreview extends StatelessWidget {
                               fontSize: 15),
                           children: <TextSpan>[
                             TextSpan(
-                                text:
-                                vehicleName,
+                                text: vehicleName,
                                 style: TextStyle(
-                                    fontWeight:
-                                    FontWeight.normal,
+                                    fontWeight: FontWeight.normal,
                                     fontSize: 15)),
                           ],
                         ),
@@ -96,8 +93,7 @@ class HistoryPreview extends StatelessWidget {
                             TextSpan(
                                 text: vehicleNo,
                                 style: TextStyle(
-                                    fontWeight:
-                                    FontWeight.normal,
+                                    fontWeight: FontWeight.normal,
                                     fontSize: 15)),
                           ],
                         ),
@@ -117,8 +113,7 @@ class HistoryPreview extends StatelessWidget {
                             TextSpan(
                                 text: vehicleOwner,
                                 style: TextStyle(
-                                    fontWeight:
-                                    FontWeight.normal,
+                                    fontWeight: FontWeight.normal,
                                     fontSize: 15)),
                           ],
                         ),
@@ -138,8 +133,7 @@ class HistoryPreview extends StatelessWidget {
                             TextSpan(
                                 text: startTime,
                                 style: TextStyle(
-                                    fontWeight:
-                                    FontWeight.normal,
+                                    fontWeight: FontWeight.normal,
                                     fontSize: 15)),
                           ],
                         ),
@@ -150,7 +144,7 @@ class HistoryPreview extends StatelessWidget {
               ),
             ),
             height: 183.h,
-            width: 270.w,
+            width: 330.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: Colors.white,
