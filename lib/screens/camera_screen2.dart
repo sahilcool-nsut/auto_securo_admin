@@ -3,7 +3,7 @@ import 'package:auto_securo_admin/services/database_services.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-
+import 'package:date_format/date_format.dart';
 class CameraScreen2 extends StatefulWidget {
   @override
   _CameraScreen2State createState() => _CameraScreen2State();
@@ -70,9 +70,20 @@ class _CameraScreen2State extends State<CameraScreen2> {
   }
 
   void getWords(VisionText visionText) {
+
+
+    RegExp regEx = RegExp("^[A-Z]{0,5}[0-9A-Z]{1,2}[A-Z]{2}[0-9]{4}\$",caseSensitive: true);
     for (TextBlock block in visionText.blocks) {
       for (TextLine line in block.lines) {
-        mailAddress = line.text + '\n';
+        String temp = line.text.replaceAll(' ', '');
+        print(line.text);
+        print(temp);
+        temp = temp.replaceAll("\n", '');
+        print("OOOF");
+        if (regEx.hasMatch(temp)) {
+          print("accepted");
+          mailAddress = temp;
+        }
         print(mailAddress);
       }
     }
@@ -130,19 +141,19 @@ class _CameraScreen2State extends State<CameraScreen2> {
                     ),
                     OutlinedButton(
                       onPressed: () async {
-                        // await DatabaseService().sendNotification(userName, vehicleName, numberPlate, targetPhone, timeStamp)
+                         await DatabaseService().sendNotification('custom', 'custom',mailAddress, 'custom', formatDate(DateTime.now(), [dd, '/',mm, '/', yyyy, ', ',HH, ':', nn,]).toString());
                       },
                       child: Text('Send notification'),
                     )
                   ],
                 )
-              : Stack(
+              : ListView(
                   children: [
                     Container(
                       width: double.infinity,
                       child: CameraPreview(_camera),
                     ),
-                    Text(mailAddress),
+                    Text(mailAddress,style: TextStyle(color: Colors.black,fontSize: 17),),
                   ],
                 ),
           _camera != null ? _buildResults(_textScanResults) : Container(),
